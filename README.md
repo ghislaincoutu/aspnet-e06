@@ -12,11 +12,21 @@ dotnet new gitignore
 ## Port réservé à l’application aspnet-e07
 > 5971
 
-## Sous-répertoires et fichiers supplémentaires générés pour réaliser l’application
+## Sous-répertoires et fichiers supplémentaires générés pour programmer l’application
 ```
 /aspnet06/Controllers/ArticlesControllers.cs
 /aspnet06/Data/ApplicationDbContext.cs
 /aspnet06/Models/Article.cs
+```
+
+## Sous-répertoires reliés à l’application
+Voici les sous-répertoires reliées à l’application :
+```
+~/Documents/XD01/aspnet-e06/
+/etc/apache2/sites-available/
+/etc/systemd/system/
+/var/www/aspnet06/
+/var/www/html/d003/aspnet-e06/
 ```
 
 ## Création des fichiers Angular 20
@@ -81,7 +91,7 @@ dotnet tool install --global dotnet-ef
 ## Création des variables d’environnement temporaires
 À utiliser pour tester l’application `aspnet-e06`. Les variables d’environnement temporaires sont accessibles uniquement à partir du terminal où elles ont été créées.
 ```sh
-export database31=mydatabase
+export database31=aspnet06
 echo $database31
 export user31=myusername
 echo $user31
@@ -100,10 +110,10 @@ S’il faut modifier la structure de la base de données, dans ce cas supprimer 
 À partir du terminal, saisir la commande suivante
 ```sh
 cd aspnet-e06/aspnet06
-dotnet run --urls="http://localhost:5971"
+dotnet run --urls="http://localhost:5000"
 ```
 L’application est disponible à partir de l’adresse URL suivante :
-http://localhost:5971/api/articles
+http://localhost:5000/api/articles
 
 ## Accès à l’application ASP.NET à partir de Apache
 Il ne faut pas que le serveur Web Kestrel (celui qui est intégré à ASP.NET Core) soit accessible directement depuis l’extérieur, comme un serveur Web public. Les fichiers doivent être localisés dans le sous-répertoire `/var/www/aspnet07`, et non dans le sous-répertoire `/var/www/html/aspnet07`.
