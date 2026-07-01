@@ -1,6 +1,6 @@
-# aspnet-e06 &mdash; Programmation d’une application ASP.NET CRUD
+# aspnet-e06 &mdash; Programmation d’une application Web (CRUD)
 
-## Création des fichiers ASP.NET
+## Création des fichiers ASP.NET Web API
 À partir du dossier `aspnet-e06`, exécuter les commandes suivantes :
 ```sh
 cd aspnet-e06
@@ -12,7 +12,7 @@ dotnet new gitignore
 ## Port réservé à l’application aspnet-e07
 > 5971
 
-## Sous-répertoires et fichiers supplémentaires générés pour réaliser l’excerice
+## Sous-répertoires et fichiers supplémentaires générés pour réaliser l’application
 ```
 /aspnet06/Controllers/ArticlesControllers.cs
 /aspnet06/Data/ApplicationDbContext.cs
@@ -24,8 +24,35 @@ dotnet new gitignore
 ```sh
 npx @angular/cli@20 new angular06
 ```
-Au cours de l’installation des fichiers, sélectionner les options par défaut.
+Au cours de la création des fichiers, sélectionner les options par défaut.
 
+## Publication de l’application ASP.NET sur un serveur Web
+À partir du terminal, saisir la commande suivante :
+```sh
+cd aspnet-e06/aspnet06
+dotnet publish -c Release -r linux-x64 --self-contained true -p:PublishSingleFile=true
+```
+Les fichiers de publication sont générés dans le sous-répertoire suivant :
+```sh
+/aspnet-e06/aspnet06/bin/Release/net8.0/linux-x64/publish
+```
+Copier les fichiers dans le dossier suivant :
+```sh
+/var/www/aspnet06/
+```
+Appliquer les permissions suivantes :
+```sh
+sudo chown -R www-data:www-data /var/www/aspnet06
+```
+Tester l’activation de l’application :
+```sh
+cd /var/www/aspnet
+./aspnet06
+```
+L’application est disponible à partir de l’adresse URL suivante :
+```
+http://localhost:5971/api/articles
+```
 
 ## Commandes MySQL
 Création de la base de données.
@@ -52,7 +79,7 @@ dotnet tool install --global dotnet-ef
 ```
 
 ## Création des variables d’environnement temporaires
-À utiliser pour tester l’exercice aspnet-e06. Les variables d’environnement temporaires sont accessibles uniquement à partir du terminal où elles ont été créées.
+À utiliser pour tester l’application `aspnet-e06`. Les variables d’environnement temporaires sont accessibles uniquement à partir du terminal où elles ont été créées.
 ```sh
 export database31=mydatabase
 echo $database31
@@ -78,7 +105,10 @@ dotnet run --urls="http://localhost:5971"
 L’application est disponible à partir de l’adresse URL suivante :
 http://localhost:5971/api/articles
 
-## Commandes curl (Client URL)
+## Accès à l’application ASP.NET à partir de Apache
+Il ne faut pas que le serveur Web Kestrel (celui qui est intégré à ASP.NET Core) soit accessible directement depuis l’extérieur, comme un serveur Web public. Les fichiers doivent être localisés dans le sous-répertoire `/var/www/aspnet07`, et non dans le sous-répertoire `/var/www/html/aspnet07`.
+
+## Commandes curl (Client URL) à utiliser pour tester la base de données
 Créer un nouvel enregistrement :
 ```sh
 curl -X 'POST' 'http://localhost:5971/api/articles' -H 'Content-Type: application/json' -d '{\"title\":\"Test\",\"content\":\"Ceci est un test\",\"publishedDate\":\"$(date +%Y-%m-%d)\"}'
