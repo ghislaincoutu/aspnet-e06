@@ -119,15 +119,15 @@ http://localhost:5000/api/articles
 Il ne faut pas que le serveur Web Kestrel (celui qui est intégré à ASP.NET Core) soit accessible directement depuis l’extérieur, comme un serveur Web public. Les fichiers doivent être localisés dans le sous-répertoire `/var/www/aspnet07`, et non dans le sous-répertoire `/var/www/html/aspnet07`.
 
 ## Commandes curl (Client URL) à utiliser pour tester la base de données
-Créer un nouvel enregistrement :
-```sh
-curl -X 'POST' 'http://localhost:5971/api/articles' -H 'Content-Type: application/json' -d '{\"title\":\"Test\",\"content\":\"Ceci est un test\",\"publishedDate\":\"$(date +%Y-%m-%d)\"}'
-```
 Lire tous les enregistrements :
 ```sh
-curl -X 'GET' 'http://localhost:5971/api/articles' -H 'accept: application/json'
+curl -X 'GET' 'http://localhost:5000/api/articles' -H 'accept: application/json'
+```
+Créer un nouvel enregistrement :
+```sh
+curl -X 'POST' 'http://localhost:5000/api/articles' -H 'Content-Type: application/json' -d '{\"title\":\"Test\",\"content\":\"Ceci est un test\",\"publishedDate\":\"$(date +%Y-%m-%d)\"}'
 ```
 Supprimer un enregistrement :
 ```sh
-curl -X 'DELETE' 'http://localhost:5971/api/articles/1' -H 'accept: */*'
+curl -X 'DELETE' 'http://localhost:5000/api/articles/1' -H 'accept: */*'
 ```
