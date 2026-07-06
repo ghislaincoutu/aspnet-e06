@@ -32,13 +32,13 @@ namespace aspnet06.Controllers
         {
             _context.Articles.Add(article);
             await _context.SaveChangesAsync();
-            return CreatedAtAction(nameof(Get), new { id = article.Id }, article);
+            return CreatedAtAction(nameof(Get), new { id = article.id }, article);
         }
 
         [HttpPut("{id}")]
         public async Task<IActionResult> Update(int id, Article article)
         {
-            if (id != article.Id) return BadRequest();
+            if (id != article.id) return BadRequest();
             _context.Entry(article).State = EntityState.Modified;
             await _context.SaveChangesAsync();
             return NoContent();

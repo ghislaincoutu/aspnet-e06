@@ -9,6 +9,32 @@ cd aspnet06
 dotnet new gitignore
 ```
 
+## Création des fichiers Angular 20
+À partir du dossier `aspnet-e06`, exécuter les commandes suivantes :
+```sh
+npx @angular/cli@20 new angular06
+```
+Au cours de la création des fichiers, sélectionner les options par défaut.
+
+## Fichiers Angular générés pour réaliser l’exercice
+```sh
+ng generate service services/articles --type=service
+ng generate component components/articles --type=component
+```
+
+## Installation des dépendances requises
+À partir du dossier `aspnet-e06/aspnet06`, exécuter les commandes suivantes :
+```sh
+cd aspnet06
+dotnet add package Pomelo.EntityFrameworkCore.MySql --version 8.0.0
+dotnet add package Microsoft.EntityFrameworkCore.Design --version 8.0.0
+```
+
+## Installation de l’application dotnet-ef
+```sh
+dotnet tool install --global dotnet-ef
+```
+
 ## Port réservé à l’application aspnet-e07
 > 5971
 
@@ -29,41 +55,6 @@ Voici les sous-répertoires reliées à l’application :
 /var/www/html/d003/aspnet-e06/
 ```
 
-## Création des fichiers Angular 20
-À partir du dossier `aspnet-e06`, exécuter les commandes suivantes :
-```sh
-npx @angular/cli@20 new angular06
-```
-Au cours de la création des fichiers, sélectionner les options par défaut.
-
-## Publication de l’application ASP.NET sur un serveur Web
-À partir du terminal, saisir la commande suivante :
-```sh
-cd aspnet-e06/aspnet06
-dotnet publish -c Release -r linux-x64 --self-contained true -p:PublishSingleFile=true
-```
-Les fichiers de publication sont générés dans le sous-répertoire suivant :
-```sh
-/aspnet-e06/aspnet06/bin/Release/net8.0/linux-x64/publish
-```
-Copier les fichiers dans le dossier suivant :
-```sh
-/var/www/aspnet06/
-```
-Appliquer les permissions suivantes :
-```sh
-sudo chown -R www-data:www-data /var/www/aspnet06
-```
-Tester l’activation de l’application :
-```sh
-cd /var/www/aspnet
-./aspnet06
-```
-L’application est disponible à partir de l’adresse URL suivante :
-```
-http://localhost:5971/api/articles
-```
-
 ## Commandes MySQL
 Création de la base de données.
 ```sh
@@ -72,20 +63,7 @@ CREATE DATABASE aspnet06;
 ```
 Exportation de la base de données.
 ```sh
-sudo mysqldump -u root -p aspnet06 > aspnet06.sql
-```
-
-## Installation des dépendances requises
-À partir du dossier `aspnet-e06/aspnet06`, exécuter les commandes suivantes :
-```sh
-cd aspnet06
-dotnet add package Pomelo.EntityFrameworkCore.MySql --version 8.0.0
-dotnet add package Microsoft.EntityFrameworkCore.Design --version 8.0.0
-```
-
-## Installation de l’application dotnet-ef
-```sh
-dotnet tool install --global dotnet-ef
+sudo mysqldump -u root -p --routines --triggers --events aspnet06 > aspnet06.sql
 ```
 
 ## Création des variables d’environnement temporaires
@@ -116,16 +94,103 @@ L’application est disponible à partir de l’adresse URL suivante :
 http://localhost:5000/api/articles
 
 ## Accès à l’application ASP.NET à partir de Apache
-Il ne faut pas que le serveur Web Kestrel (celui qui est intégré à ASP.NET Core) soit accessible directement depuis l’extérieur, comme un serveur Web public. Les fichiers doivent être localisés dans le sous-répertoire `/var/www/aspnet07`, et non dans le sous-répertoire `/var/www/html/aspnet07`.
+Il ne faut pas que le serveur Web Kestrel (celui qui est intégré à ASP.NET Core) soit accessible directement depuis l’extérieur, comme un serveur Web public. Les fichiers doivent être localisés dans le sous-répertoire `/var/www/aspnet06`, et non dans le sous-répertoire `/var/www/html/aspnet06`.
 
-## Commandes curl (Client URL) à utiliser pour tester la base de données
+## Configuration du serveur Apache
+Dans le fichier `/etc/apache2/sites-available/default-ssl.conf`, ajouter les directives `ProxyPass` et `ProxyPassReverse`.
+```conf
+<VirtualHost *:443>
+    ServerName 192.168.56.164
+
+    SSLEngine on
+    SSLCertificateFile /etc/ssl/certs/apache-selfsigned.crt
+    SSLCertificateKeyFile /etc/ssl/private/apache-selfsigned.key
+
+    ProxyPreserveHost On
+    # Application aspnet-e06
+    ProxyPass /api/articles http://127.0.0.1:5971/api/articles
+    ProxyPassReverse /api/articles http://127.0.0.1:5971/api/articles
+
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
+```
+
+## Publication de l’application ASP.NET sur un serveur Web
+À partir du terminal, saisir la commande suivante :
+```sh
+cd aspnet-e06/aspnet06
+dotnet publish -c Release -r linux-x64 --self-contained true -p:PublishSingleFile=true
+```
+Les fichiers de publication sont générés dans le sous-répertoire suivant :
+```sh
+/aspnet-e06/aspnet06/bin/Release/net8.0/linux-x64/publish
+```
+Copier les fichiers dans le dossier suivant :
+```sh
+/var/www/aspnet06/
+```
+Appliquer les permissions suivantes :
+```sh
+sudo chown -R www-data:www-data /var/www/aspnet06
+```
+Tester l’activation de l’application :
+```sh
+cd /var/www/aspnet
+./aspnet06
+```
+L’application est disponible à partir de l’adresse URL suivante :
+```
+http://localhost:5971/api/articles
+```
+
+## Publication de l’application sur un serveur Web en tant que service
+Les fichiers compilés `ASP.NET` doivent être localisés dans le sous-répertoire suivant :
+```sh
+/var/www/aspnet06/
+```
+À partir du terminal, saisir la commande suivante :
+```sh
+sudo nano /etc/systemd/system/aspnet06.service
+```
+Dans le fichier `aspnet06.service`, intégrer le code suivant :
+```conf
+[Unit]
+Description=ASP.NET 8.0 -- aspnet-e06
+After=network.target
+
+[Service]
+WorkingDirectory=/var/www/aspnet06
+ExecStart=/var/www/aspnet06/aspnet06
+Restart=always
+RestartSec=10
+SyslogIdentifier=aspnet06
+User=www-data
+Environment=ASPNETCORE_ENVIRONMENT=Development
+Environment=ASPNETCORE_URLS=http://localhost:5971
+Environment="database31=aspnet06"
+Environment="user31=myusername"
+Environment="password31=mypassword"
+
+[Install]
+WantedBy=multi-user.target
+```
+À partir du terminal, saisir les commandes suivantes :
+```sh
+sudo systemctl daemon-reload
+sudo systemctl enable aspnet06
+sudo systemctl start aspnet06
+sudo systemctl status aspnet06
+```
+
+## Commandes _curl_ à utiliser pour tester la base de données
 Lire tous les enregistrements :
 ```sh
 curl -X 'GET' 'http://localhost:5000/api/articles' -H 'accept: application/json'
 ```
 Créer un nouvel enregistrement :
 ```sh
-curl -X 'POST' 'http://localhost:5000/api/articles' -H 'Content-Type: application/json' -d '{\"title\":\"Test\",\"content\":\"Ceci est un test\",\"publishedDate\":\"$(date +%Y-%m-%d)\"}'
+curl -X 'POST' 'http://localhost:5000/api/articles' -H 'Content-Type: application/json' -d "{\"title\":\"Test\",\"content\":\"Ceci est un test\",\"pubdate\":\"$(date +%Y-%m-%d)\"}"
 ```
 Supprimer un enregistrement :
 ```sh

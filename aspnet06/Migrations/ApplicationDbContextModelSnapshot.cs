@@ -20,23 +20,23 @@ namespace aspnet06.Migrations
 
             modelBuilder.Entity("aspnet06.Models.Article", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("Content")
+                    b.Property<string>("content")
                         .IsRequired()
                         .HasColumnType("varchar(200)");
 
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("varchar(200)");
-
-                    b.Property<string>("publishedDate")
+                    b.Property<string>("pubdate")
                         .IsRequired()
                         .HasColumnType("varchar(100)");
 
-                    b.HasKey("Id");
+                    b.Property<string>("title")
+                        .IsRequired()
+                        .HasColumnType("varchar(200)");
+
+                    b.HasKey("id");
 
                     b.ToTable("Articles");
                 });

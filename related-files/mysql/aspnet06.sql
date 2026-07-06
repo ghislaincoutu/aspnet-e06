@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.4.9, for Linux (x86_64)
+-- MySQL dump 10.13  Distrib 8.4.10, for Linux (x86_64)
 --
 -- Host: localhost    Database: aspnet06
 -- ------------------------------------------------------
--- Server version	8.4.9-0ubuntu0.26.04.1
+-- Server version	8.4.10-0ubuntu0.26.04.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -23,12 +23,12 @@ DROP TABLE IF EXISTS `Articles`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `Articles` (
-  `Id` int NOT NULL AUTO_INCREMENT,
-  `Title` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `Content` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `publishedDate` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  PRIMARY KEY (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `id` int NOT NULL AUTO_INCREMENT,
+  `title` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `content` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `pubdate` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -37,7 +37,7 @@ CREATE TABLE `Articles` (
 
 LOCK TABLES `Articles` WRITE;
 /*!40000 ALTER TABLE `Articles` DISABLE KEYS */;
-INSERT INTO `Articles` VALUES (1,'Test','Ceci est un test','2026-06-08'),(2,'Test','Ceci est un test','2026-06-08'),(3,'Test','Ceci est un test','2026-05-30');
+INSERT INTO `Articles` VALUES (1,'Test','Ceci est un test','2000-02-02'),(2,'Test','Ceci est un test','2000-02-02'),(3,'Test','Ceci est un test','2000-02-02'),(4,'Test','Ceci est un test','2026-07-06');
 /*!40000 ALTER TABLE `Articles` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -61,9 +61,17 @@ CREATE TABLE `__EFMigrationsHistory` (
 
 LOCK TABLES `__EFMigrationsHistory` WRITE;
 /*!40000 ALTER TABLE `__EFMigrationsHistory` DISABLE KEYS */;
-INSERT INTO `__EFMigrationsHistory` VALUES ('20260608180251_InitialCreate','8.0.0');
+INSERT INTO `__EFMigrationsHistory` VALUES ('20260706143826_InitialCreate','8.0.0');
 /*!40000 ALTER TABLE `__EFMigrationsHistory` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Dumping events for database 'aspnet06'
+--
+
+--
+-- Dumping routines for database 'aspnet06'
+--
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -74,4 +82,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2026-06-22 13:03:39
+-- Dump completed on 2026-07-06 11:29:35

@@ -4,17 +4,17 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 public class Article
 {
-    public int Id { get; set; }
+    public int id { get; set; }
     [Column(TypeName = "varchar(200)")]
-    public string Title { get; set; }
+    public string title { get; set; }
     [Column(TypeName = "varchar(200)")]
-    public string Content { get; set; }
+    public string content { get; set; }
     [Column(TypeName = "varchar(100)")]
-    public string publishedDate { get; set; }
+    public string pubdate { get; set; }
     public Article()
     {
-        Title = string.Empty;
-        Content = string.Empty;
-        publishedDate = string.Empty;
+        title = string.Empty;
+        content = string.Empty;
+        pubdate = string.Empty;
     }
 }
