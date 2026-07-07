@@ -43,9 +43,9 @@ header {
     .themetitle {
       margin: 0 0 8px 0;
       padding: 0;
-      font-size: 2.8rem;
+      font-size: 2.6rem;
       font-weight: bold;
-      line-height: 3rem;
+      line-height: 2.8rem;
     }
     .subtitle {
       margin: 0 0 8px 0;
@@ -91,6 +91,10 @@ main {
 .table45 td {
   padding: 5px;
   border: 1px solid #ccf;
+}
+.table45 td:nth-child(3) {
+  width: 120px;
+  text-align: center;
 }
 .table45 td:nth-child(4) {
   width: 300px;

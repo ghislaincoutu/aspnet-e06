@@ -22,7 +22,7 @@ namespace aspnet06.Migrations
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     title = table.Column<string>(type: "varchar(200)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    content = table.Column<string>(type: "varchar(200)", nullable: false)
+                    content = table.Column<string>(type: "varchar(512)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     pubdate = table.Column<string>(type: "varchar(100)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4")

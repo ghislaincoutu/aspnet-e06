@@ -10,7 +10,7 @@ using aspnet06.Data;
 namespace aspnet06.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20260706143826_InitialCreate")]
+    [Migration("20260707035940_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -29,7 +29,7 @@ namespace aspnet06.Migrations
 
                     b.Property<string>("content")
                         .IsRequired()
-                        .HasColumnType("varchar(200)");
+                        .HasColumnType("varchar(512)");
 
                     b.Property<string>("pubdate")
                         .IsRequired()

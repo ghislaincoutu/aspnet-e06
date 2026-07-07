@@ -26,7 +26,7 @@ namespace aspnet06.Migrations
 
                     b.Property<string>("content")
                         .IsRequired()
-                        .HasColumnType("varchar(200)");
+                        .HasColumnType("varchar(512)");
 
                     b.Property<string>("pubdate")
                         .IsRequired()
