@@ -82,6 +82,12 @@ Importation de la procédure `reset_database()`.
 ```sh
 sudo mysql -u root -p < procedure06.01.sql
 ```
+Ajustement des permissions si nécessaire.
+```sql
+sudo mysql -u root -p
+GRANT EXECUTE ON `aspnet06`.* TO 'myusername'@'localhost';
+FLUSH PRIVILEGES;
+```
 Appel de la procédure `reset_database()`.
 ```sql
 sudo mysql -u root -p
@@ -105,7 +111,7 @@ echo $password31
 dotnet ef migrations add InitialCreate
 dotnet ef database update
 ```
-S’il faut modifier la structure de la base de données, dans ce cas supprimer la base de données existante et le dossier aspnet06/Migrations. Créer une nouvelle base de données et répéter la création d’une nouvelle migration _Entity Framework Core_.
+S’il faut modifier la structure de la base de données, dans ce cas supprimer la base de données existante et le dossier `aspnet06/Migrations`. Créer une nouvelle base de données et répéter la création d’une nouvelle migration _Entity Framework Core_.
 
 ## Activation de l’application
 À partir du terminal, saisir la commande suivante
@@ -209,13 +215,13 @@ sudo systemctl status aspnet06
 ## Commandes _curl_ à utiliser pour tester la base de données
 Lire tous les enregistrements :
 ```sh
-curl -X 'GET' 'http://localhost:5000/api/articles' -H 'accept: application/json'
+curl -X GET 'http://localhost:5000/api/articles' -H 'accept: application/json'
 ```
 Créer un nouvel enregistrement :
 ```sh
-curl -X 'POST' 'http://localhost:5000/api/articles' -H 'Content-Type: application/json' -d "{\"title\":\"Test\",\"content\":\"Ceci est un test\",\"pubdate\":\"$(date +%Y-%m-%d)\"}"
+curl -X POST 'http://localhost:5000/api/articles' -H 'Content-Type: application/json' -d "{\"title\":\"Test\",\"content\":\"Ceci est un test\",\"pubdate\":\"$(date +%Y-%m-%d)\"}"
 ```
 Supprimer un enregistrement :
 ```sh
-curl -X 'DELETE' 'http://localhost:5000/api/articles/1' -H 'accept: */*'
+curl -X DELETE 'http://localhost:5000/api/articles/1' -H 'accept: */*'
 ```

@@ -63,8 +63,12 @@ main {
     min-width: 280px;
     background-color: #fff;
     h2 {
-      margin: 12px 0 8px 0;
+      margin: 12px 0 6px 0;
       font-size: 2rem;
+    }
+    h3 {
+      margin: 12px 0 6px 0;
+      font-size: 1.6rem
     }
   }
 }
@@ -91,6 +95,7 @@ main {
 .table45 td {
   padding: 5px;
   border: 1px solid #ccf;
+  vertical-align: top;
 }
 .table45 td:nth-child(3) {
   width: 120px;

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { ArticlesService, Articles } from '../../services/articles.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -13,6 +13,7 @@ import { FormsModule } from '@angular/forms';
 export class ArticlesComponent {
   articles: Articles[] = [];
   article12: Articles = { id: 0, title: '', content: '', pubdate: '' };
+  private resetDatabase = inject(ArticlesService);
   constructor(private service: ArticlesService) { }
 
   ngOnInit() {
@@ -38,5 +39,17 @@ export class ArticlesComponent {
 
   delete(id: number) {
     this.service.delete(id).subscribe(() => this.load());
+  }
+
+  reset(): void {
+    this.resetDatabase.resetArticles().subscribe({
+      next: (response) => {
+        alert(response.message);
+      },
+      error: (err) => {
+        console.error('Erreur lors de la réinitialisation', err);
+        alert('Une erreur est survenue lors de la réinitialisation.');
+      }
+    });
   }
 }

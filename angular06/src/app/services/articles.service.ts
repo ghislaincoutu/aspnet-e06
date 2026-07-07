@@ -15,6 +15,7 @@ export interface Articles {
 
 export class ArticlesService {
   private api = "/api/articles";
+  private reset = '/api/articles/reset';
   constructor(private http: HttpClient) { }
 
   getAll(): Observable<Articles[]> {
@@ -31,5 +32,9 @@ export class ArticlesService {
 
   delete(id: number) {
     return this.http.delete(`${this.api}/${id}`);
+  }
+
+  resetArticles(): Observable<any> {
+    return this.http.post<any>(this.reset, {});
   }
 }

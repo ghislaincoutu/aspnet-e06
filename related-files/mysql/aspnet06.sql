@@ -25,7 +25,7 @@ DROP TABLE IF EXISTS `Articles`;
 CREATE TABLE `Articles` (
   `id` int NOT NULL AUTO_INCREMENT,
   `title` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `content` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `content` varchar(512) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `pubdate` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -37,7 +37,7 @@ CREATE TABLE `Articles` (
 
 LOCK TABLES `Articles` WRITE;
 /*!40000 ALTER TABLE `Articles` DISABLE KEYS */;
-INSERT INTO `Articles` VALUES (1,'Titre 1','Voici mon texte.','2026-01-13'),(2,'Titre 2','Voici mon texte.','2026-05-25');
+INSERT INTO `Articles` VALUES (1,'Lorem ipsum dolor sit amet','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse turpis sapien, efficitur et pharetra eu, vestibulum quis urna.','2026-07-06'),(2,'Integer ullamcorper nisi sit','Integer ullamcorper nisi sit amet posuere vestibulum. Etiam tempus, nisl non aliquet scelerisque.','2026-07-06');
 /*!40000 ALTER TABLE `Articles` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -61,7 +61,7 @@ CREATE TABLE `__EFMigrationsHistory` (
 
 LOCK TABLES `__EFMigrationsHistory` WRITE;
 /*!40000 ALTER TABLE `__EFMigrationsHistory` DISABLE KEYS */;
-INSERT INTO `__EFMigrationsHistory` VALUES ('20260706143826_InitialCreate','8.0.0');
+INSERT INTO `__EFMigrationsHistory` VALUES ('20260707035940_InitialCreate','8.0.0');
 /*!40000 ALTER TABLE `__EFMigrationsHistory` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -86,8 +86,8 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `reset_database`()
 BEGIN
     TRUNCATE TABLE Articles;
     INSERT INTO Articles (title, content, pubdate) VALUES
-        ('Titre 1', 'Voici mon texte.', '2026-01-13'),
-        ('Titre 2', 'Voici mon texte.', '2026-05-25');
+        ('Lorem ipsum dolor sit amet', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse turpis sapien, efficitur et pharetra eu, vestibulum quis urna.', '2026-07-06'),
+        ('Integer ullamcorper nisi sit', 'Integer ullamcorper nisi sit amet posuere vestibulum. Etiam tempus, nisl non aliquet scelerisque.', '2026-07-06');
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -104,4 +104,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2026-07-06 14:55:07
+-- Dump completed on 2026-07-07 18:43:04

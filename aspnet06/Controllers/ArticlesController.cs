@@ -53,5 +53,12 @@ namespace aspnet06.Controllers
             await _context.SaveChangesAsync();
             return NoContent();
         }
+
+        [HttpPost("reset")]
+        public async Task<IActionResult> ResetArticles()
+        {
+            await _context.Database.ExecuteSqlRawAsync("CALL reset_database();");
+            return Ok(new { message = "Base de données réinitialisée." });
+        }
     }
 }
