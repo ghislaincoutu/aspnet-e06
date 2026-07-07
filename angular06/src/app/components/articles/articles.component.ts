@@ -12,6 +12,7 @@ import { FormsModule } from '@angular/forms';
 
 export class ArticlesComponent {
   articles: Articles[] = [];
+  article12: Articles = { id: 0, title: '', content: '', pubdate: '' };
 
   constructor(private service: ArticlesService) { }
 
@@ -19,8 +20,24 @@ export class ArticlesComponent {
     this.load();
   }
 
+  save() {
+    if (this.article12.id === 0) {
+      this.service.create(this.article12).subscribe(() => this.load());
+    } else {
+      this.service.update(this.article12).subscribe(() => this.load());
+    }
+    this.article12 = { id: 0, title: '', content: '', pubdate: '' };
+  }
+
   load() {
     this.service.getAll().subscribe(data => this.articles = data);
   }
 
+  edit(a: Articles) {
+    this.article12 = { ...a };
+  }
+
+  delete(id: number) {
+    this.service.delete(id).subscribe(() => this.load());
+  }
 }

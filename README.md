@@ -65,6 +65,29 @@ Exportation de la base de données.
 ```sh
 sudo mysqldump -u root -p --routines --triggers --events aspnet06 > aspnet06.sql
 ```
+Création de la procédure `reset_database()` dans la base de données `aspnet06`.
+```sql
+USE aspnet06;
+DELIMITER $$
+CREATE PROCEDURE reset_database()
+BEGIN
+    TRUNCATE TABLE Articles;
+    INSERT INTO Articles (title, content, pubdate) VALUES
+        ('Titre 1', 'Voici mon texte.', '2026-01-13'),
+        ('Titre 2', 'Voici mon texte.', '2026-05-25');
+END $$
+DELIMITER ;
+```
+Importation de la procédure `reset_database()`.
+```sh
+sudo mysql -u root -p < procedure06.01.sql
+```
+Appel de la procédure `reset_database()`.
+```sql
+sudo mysql -u root -p
+USE aspnet06;
+CALL reset_database();
+```
 
 ## Création des variables d’environnement temporaires
 À utiliser pour tester l’application `aspnet-e06`. Les variables d’environnement temporaires sont accessibles uniquement à partir du terminal où elles ont été créées.
