@@ -13,7 +13,6 @@ import { FormsModule } from '@angular/forms';
 export class ArticlesComponent {
   articles: Articles[] = [];
   article12: Articles = { id: 0, title: '', content: '', pubdate: '' };
-
   constructor(private service: ArticlesService) { }
 
   ngOnInit() {
