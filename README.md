@@ -82,17 +82,25 @@ Importation de la procédure `reset_database()`.
 ```sh
 sudo mysql -u root -p < procedure06.01.sql
 ```
-Ajustement des permissions si nécessaire.
+Ajustement des permissions au niveau des procédures, si nécessaire.
 ```sql
 sudo mysql -u root -p
 GRANT EXECUTE ON `aspnet06`.* TO 'myusername'@'localhost';
 FLUSH PRIVILEGES;
+SHOW GRANTS FOR 'myusername'@'localhost';
 ```
 Appel de la procédure `reset_database()`.
 ```sql
 sudo mysql -u root -p
 USE aspnet06;
 CALL reset_database();
+```
+Ajustement des permissions en environnement de production.
+```sql
+sudo mysql -u root -p
+GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, INDEX, ALTER, CREATE TEMPORARY TABLES ON 'aspnet06'.* TO 'myusername'@'localhost';
+FLUSH PRIVILEGES;
+SHOW GRANTS FOR 'myusername'@'localhost';
 ```
 
 ## Création des variables d’environnement temporaires
