@@ -78,6 +78,29 @@ main {
   }
 }
 
+.form45 {
+  div {
+    margin: 0 0 10px 0;
+  }
+  label {
+    display: block;
+    margin: 8px 0 5px 0;
+  }
+  input {
+    padding: 5px;
+  }
+  #title {
+    min-width: 600px;
+  }
+  textarea {
+    padding: 5px;
+    width: 100%;
+    min-height: 50px;
+    font-family: Arial, Helevica, sans-serif;
+    font-size: 1rem;
+  }
+}
+
 .table-container {
   overflow-x: auto;
 }

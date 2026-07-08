@@ -1,8 +1,21 @@
-<h2>Articles</h2>
-<input [(ngModel)]="article12.title" placeholder="Titre">
-<input [(ngModel)]="article12.content" placeholder="Contenu">
-<input [(ngModel)]="article12.pubdate" placeholder="Date de publication">
-<button (click)="save()">Enregistrer</button>
+<section aria-labelledby="articles-title" class="form45">
+  <h2 id="articles-title">Articles</h2>
+  <form (ngSubmit)="save()">
+    <div>
+      <label for="title">Titre</label>
+      <input id="title" name="title" type="text" [(ngModel)]="article12.title">
+    </div>
+    <div>
+      <label for="content">Contenu</label>
+      <textarea id="content" name="content" [(ngModel)]="article12.content"></textarea>
+    </div>
+    <div>
+      <label for="pubdate">Date de publication</label>
+      <input id="pubdate" name="pubdate" type="date" [(ngModel)]="article12.pubdate">
+    </div>
+    <button type="submit">Enregistrer</button>
+  </form>
+</section>
 
 <div class="table-container">
   <table class="table45">
