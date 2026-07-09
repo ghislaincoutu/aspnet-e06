@@ -1,17 +1,19 @@
 <section aria-labelledby="articles-title" class="form45">
   <h2 id="articles-title">Articles</h2>
   <form (ngSubmit)="save()" #articleForm="ngForm">
-    <div>
-      <label for="title">Titre*</label>
-      <input id="title" name="title" type="text" [(ngModel)]="article12.title" required>
+    <div class="row45">
+      <div class="col01">
+        <label for="title">Titre*</label>
+        <input id="title" name="title" type="text" [(ngModel)]="article12.title" required>
+      </div>
+      <div class="col02">
+        <label for="pubdate">Date de publication*</label>
+        <input id="pubdate" name="pubdate" type="date" [(ngModel)]="article12.pubdate" required>
+      </div>
     </div>
     <div>
       <label for="content">Contenu*</label>
       <textarea id="content" name="content" [(ngModel)]="article12.content" required></textarea>
-    </div>
-    <div>
-      <label for="pubdate">Date de publication*</label>
-      <input id="pubdate" name="pubdate" type="date" [(ngModel)]="article12.pubdate" required>
     </div>
     <p>* Tous les champs sont obligatoires.</p>
     <button type="submit" [disabled]="articleForm.invalid">Enregistrer</button>

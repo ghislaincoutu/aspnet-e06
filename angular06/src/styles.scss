@@ -1,3 +1,6 @@
+$color01: hsl(238, 70%, 90%); // Saturation: 70
+$color02: hsl(238, 10%, 90%); // Saturation: 10
+
 * {
   box-sizing: border-box;
 }
@@ -12,15 +15,13 @@ p {
   margin: 0 0 6px 0;
 }
 input {
-  padding: 4px;
-  margin: 0 5px 5px 0;
+  padding: 5px;
   border: 1px solid #666;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 1rem;
 }
 select {
-  padding: 4px;
-  margin: 0 5px 5px 0;
+  padding: 5px;
   border: 1px solid #666;
   background-color: #fff;
   font-family: Arial, Helvetica, sans-serif;
@@ -39,19 +40,18 @@ header {
     padding: 10px;
     max-width: 1000px;
     min-width: 280px;
-    background-color: #ddf;
+    background-color: $color01;
     .themetitle {
-      margin: 0 0 8px 0;
+      margin: 0 0 6px 0;
       padding: 0;
       font-size: 2.6rem;
-      font-weight: bold;
-      line-height: 2.8rem;
+      font-weight: 700;
+      line-height: 2.8rem
     }
     .subtitle {
-      margin: 0 0 8px 0;
-      padding: 0;
+      margin: 0;
       font-size: 1.3rem;
-      line-height: 1.4rem;
+      line-height: 1.4rem
     }
   }
 }
@@ -62,6 +62,10 @@ main {
     max-width: 1000px;
     min-width: 280px;
     background-color: #fff;
+    .technologies {
+      font-size: 1.4rem;
+      text-align: right;
+    }
     h2 {
       margin: 12px 0 6px 0;
       font-size: 2rem;
@@ -73,12 +77,16 @@ main {
     .reset {
       margin: 10px 0;
       padding: 8px;
-      background-color: #fdd;
+      background-color: $color02;
     }
   }
 }
 
 .form45 {
+  form {
+    padding: 10px;
+    background-color: $color02;
+  }
   div {
     margin: 0 0 10px 0;
   }
@@ -87,11 +95,7 @@ main {
     margin: 8px 0 5px 0;
   }
   input {
-    padding: 5px;
-  }
-  #title {
     width: 100%;
-    max-width: 600px;
   }
   textarea {
     padding: 5px;
@@ -99,6 +103,16 @@ main {
     min-height: 50px;
     font-family: Arial, Helevica, sans-serif;
     font-size: 1rem;
+  }
+  .row45 {
+    display: flex;
+    column-gap: 20px;
+    .col01 {
+      flex: 1;
+    }
+    .col02 {
+      width: 200px;
+    }
   }
 }
 
@@ -111,7 +125,7 @@ main {
   min-width: 700px;
   border-collapse: collapse;
   border: none;
-  background-color: #eef
+  background-color: $color02;
 }
 .table45 thead {
   color: #fff;
@@ -123,14 +137,17 @@ main {
 }
 .table45 td {
   padding: 5px;
-  border: 1px solid #ccf;
+  border: 1px solid #666;
   vertical-align: top;
 }
+.table45 td:nth-child(1) {
+  min-width: 200px;
+}
 .table45 td:nth-child(3) {
-  width: 120px;
+  width: 100px;
   text-align: center;
 }
 .table45 td:nth-child(4) {
-  width: 300px;
+  width: 280px;
   text-align: center;
 }
