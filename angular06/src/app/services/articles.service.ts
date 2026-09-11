@@ -34,7 +34,7 @@ export class ArticlesService {
     return this.http.delete(`${this.api}/${id}`);
   }
 
-  resetArticles(): Observable<any> {
+  resetDatabase(): Observable<any> {
     return this.http.post<any>(this.reset, {});
   }
 }
