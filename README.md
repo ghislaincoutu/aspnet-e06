@@ -86,7 +86,7 @@ sudo mysql -u root -p < procedure06.01.sql
 Application des permissions au compte utilisateur MySQL.
 ```sql
 sudo mysql -u root -p
-GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, INDEX, ALTER, CREATE TEMPORARY TABLES, EXECUTE ON 'aspnet06'.* TO 'myusername'@'localhost';
+GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, INDEX, ALTER, CREATE TEMPORARY TABLES, EXECUTE ON `aspnet06`.* TO 'myusername'@'localhost';
 FLUSH PRIVILEGES;
 SHOW GRANTS FOR 'myusername'@'localhost';
 ```
@@ -217,13 +217,13 @@ sudo systemctl status aspnet06
 ## Commandes _curl_ à utiliser pour tester la base de données
 Lire tous les enregistrements :
 ```sh
-curl -X GET 'http://localhost:5000/api/articles' -H 'accept: application/json'
+curl -X GET 'http://localhost:5000/api/articles' -H 'accept: application/json' && echo
 ```
 Créer un nouvel enregistrement :
 ```sh
-curl -X POST 'http://localhost:5000/api/articles' -H 'Content-Type: application/json' -d "{\"title\":\"Test\",\"content\":\"Ceci est un test\",\"pubdate\":\"$(date +%Y-%m-%d)\"}"
+curl -X POST 'http://localhost:5000/api/articles' -H 'Content-Type: application/json' -d "{\"title\":\"Test\",\"content\":\"Ceci est un test\",\"pubdate\":\"$(date +%Y-%m-%d)\"}" && echo
 ```
 Supprimer un enregistrement :
 ```sh
-curl -X DELETE 'http://localhost:5000/api/articles/1' -H 'accept: */*'
+curl -X DELETE 'http://localhost:5000/api/articles/1' -H 'accept: */*' && echo
 ```
